@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.empl.mgr.dao.TeSalaryMapper" >
+  <resultMap id="BaseResultMap" type="com.empl.mgr.model.TeSalary" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="base" property="base" jdbcType="FLOAT" />
+    <result column="post" property="post" jdbcType="FLOAT" />
+    <result column="prix" property="prix" jdbcType="FLOAT" />
+    <result column="sum" property="sum" jdbcType="FLOAT"/>
+    <result column="emId" property="emId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, base, post, prix,sum, emId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from te_employee.te_salary
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from te_employee.te_salary
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.empl.mgr.model.TeSalary" >
+    insert into te_employee.te_salary (id, base, post, prix,sum,
+      emId)
+    values (#{id,jdbcType=BIGINT}, #{base,jdbcType=FLOAT}, #{post,jdbcType=FLOAT}, #{prix,jdbcType=FLOAT},
+            #{sum,jdbcType=FLOAT},#{emId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.empl.mgr.model.TeSalary" >
+    insert into te_employee.te_salary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="base != null" >
+        base,
+      </if>
+      <if test="post != null" >
+        post,
+      </if>
+      <if test="prix != null" >
+        prix,
+      </if>
+      <if test="sum != null" >
+        sum,
+      </if>
+      <if test="emId != null" >
+        emId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="base != null" >
+        #{base,jdbcType=FLOAT},
+      </if>
+      <if test="post != null" >
+        #{post,jdbcType=FLOAT},
+      </if>
+      <if test="prix != null" >
+        #{prix,jdbcType=FLOAT},
+      </if>
+      <if test="sum != null" >
+        #{sum,jdbcType=FLOAT},
+      </if>
+      <if test="emId != null" >
+        #{emid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.empl.mgr.model.TeSalary" >
+    update te_employee.te_salary
+    <set >
+      <if test="base != null" >
+        base = #{base,jdbcType=FLOAT},
+      </if>
+      <if test="post != null" >
+        post = #{post,jdbcType=FLOAT},
+      </if>
+      <if test="prix != null" >
+        prix = #{prix,jdbcType=FLOAT},
+      </if>
+      <if test="sum != null" >
+        sum = #{sum,jdbcType=FLOAT},
+      </if>
+      <if test="emId != null" >
+        emId = #{emId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.empl.mgr.model.TeSalary" >
+    update te_employee.te_salary
+    set base = #{base,jdbcType=FLOAT},
+      post = #{post,jdbcType=FLOAT},
+      prix = #{prix,jdbcType=FLOAT},
+      sum = #{sum,jdbcType=FLOAT},
+      emId = #{emId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="save" parameterType="com.empl.mgr.model.TeSalary" >
+    insert into te_employee.te_salary (base, post, prix,sum, emId) values (
+      #{base,jdbcType=FLOAT}, #{post,jdbcType=FLOAT}, #{prix,jdbcType=FLOAT},#{sum,jdbcType=FLOAT},
+      #{emId,jdbcType=BIGINT}
+    );
+  </insert>
+
+  <select id="list" parameterType="com.empl.mgr.model.TeSalary" resultMap="BaseResultMap">
+    SELECT
+    a.id,
+    a.base,
+    a.post,
+    a.prix,
+    a.sum,
+    a.emId
+    FROM te_employee.te_salary a
+   <where>
+     <if test=" null != id and '' != id">
+       and a.id = #{id,jdbcType=BIGINT}
+     </if>
+     <if test=" null != sum and '' != sum">
+       and a.sum = #{sum,jdbcType=FLOAT}
+     </if>
+   </where>
+    order by a.id desc
+  </select>
+
+  <delete id="delete" parameterType="java.lang.Long" >
+    DELETE FROM te_employee.te_salary
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+</mapper>

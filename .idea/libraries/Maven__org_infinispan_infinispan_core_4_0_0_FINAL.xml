@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.infinispan:infinispan-core:4.0.0.FINAL">
+    <CLASSES>
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/maven/lib/localWareHouse/org/infinispan/infinispan-core/4.0.0.FINAL/infinispan-core-4.0.0.FINAL.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/maven/lib/localWareHouse/org/infinispan/infinispan-core/4.0.0.FINAL/infinispan-core-4.0.0.FINAL-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$APPLICATION_HOME_DIR$/plugins/maven/lib/localWareHouse/org/infinispan/infinispan-core/4.0.0.FINAL/infinispan-core-4.0.0.FINAL-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

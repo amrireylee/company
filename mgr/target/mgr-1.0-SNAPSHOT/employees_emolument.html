@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-dialog.min.css">
+    <link type="text/css" rel="stylesheet" href="css/commone.css" />
+    <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap-dialog.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap-pagy.min.js"></script>
+    <script type="text/javascript" src="./js/common.js"></script>
+    <script type="text/javascript" src="./js/employees_emolument.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="nav navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="index.html" class="navbar-brand"><span class="glyphicon glyphicon-home"></span>&nbsp;首页</a>
+        <ul class="nav navbar-nav" id="nav-box-ul"></ul>
+        <ul class="nav navbar-nav pull-right">
+            <li><a href="modify_password.html" class="acctInfo" data-toggle="modal" data-target="#modifyPassword"><span class="glyphicon glyphicon-user"></span>&nbsp;</a></li>
+            <li><a href="javascript:void(0)" onclick="exit()">注销</a></li>
+        </ul>
+    </div>
+</div>
+<div class="container main hide">
+    <div class="row">
+        <ol class="breadcrumb"></ol>
+        <div class="row main-page">
+            <div class="col-lg-8">
+                <div class="input-group">
+                    <input type="text" class="form-control searchInput" name="searchInput" placeholder="id" maxlength="64" value="" />
+                    <span class="input-group-btn"><button class="btn btn-primary" type="button" onclick="$.search()"><span class="glyphicon glyphicon-search"></span>搜索</button></span>
+                </div><!-- /input-group -->
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-primary add-btn float-right" onclick="showAddBox()"><span class="glyphicon glyphicon-plus"></span>新增员工薪资</button>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover" style="margin-top:20px;">
+            <thead>
+            <th style="width:50px;">编号</th>
+            <th style="width:200px;">员工编号</th>
+            <th style="width:200px;">基本工资</th>
+            <th style="width:150px;">津贴</th>
+            <th style="width:150px;">奖金</th>
+            <th style="width:200px;">总工资</th>
+            <th>操作</th>
+            </thead>
+            <tbody class="tbody"></tbody>
+        </table>
+        <nav id="pagination"><ul class="pagination"></ul></nav>
+        <footer>开发者 - 刘一江</footer>
+    </div>
+</div>
+
+<div class="modal fade modify-box sm-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h4 class="modal-title">编辑薪资信息</h4></div>
+            <div class="modal-body">
+                <input type="text" class="form-control modifyId" placeholder="id" maxlength="64" value="" />
+                <input type="text" class="form-control modifyBase margin-top-15 resize" placeholder="基本工资" maxlength="128"/>
+                <input type="text" class="form-control modifyPost margin-top-15 resize" placeholder="津贴" maxlength="128"/>
+                <input type="text" class="form-control modifyPrix margin-top-15 resize" placeholder="奖金" maxlength="128"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary modifyBtn">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade add-box sm-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h4 class="modal-title">添加薪资信息</h4></div>
+            <div class="modal-body">
+                <input type="text" class="form-control addId" placeholder="员工id" maxlength="64" value="" />
+                <input type="text" class="form-control addBase margin-top-15 resize" placeholder="基本工资" maxlength="128"/>
+                <input type="text" class="form-control addPost margin-top-15 resize" placeholder="津贴" maxlength="128"/>
+                <input type="text" class="form-control addPrix margin-top-15 resize" placeholder="奖金" maxlength="128"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="addSalary()">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modifyPassword" tabindex="-1" role="dialog" aria-labelledby="modifyPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:400px;"><div class="modal-content"></div></div>
+</div>
+
+</body>
+</html>

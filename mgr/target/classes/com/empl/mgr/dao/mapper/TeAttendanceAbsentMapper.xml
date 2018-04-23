@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.empl.mgr.dao.TeAttendanceAbsentMapper" >
+  <resultMap id="BaseResultMap" type="com.empl.mgr.model.TeAttendanceAbsent" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="emId" property="emId" jdbcType="BIGINT" />
+    <result column="type_id" property="typeId" jdbcType="BIGINT" />
+    <result column="outDays" property="outDays" jdbcType="TIMESTAMP" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="timestamp" property="timestamp" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, emId, type_id, outDays, createTime, `timestamp`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from te_employee.te_attendance_absent
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from  te_employee.te_attendance_absent
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.empl.mgr.model.TeAttendanceAbsent" >
+    insert into  te_employee.te_attendance_absent (id, emId, type_id,
+      outDays, createTime, `timestamp`
+      )
+    values (#{id,jdbcType=BIGINT}, #{emId,jdbcType=BIGINT}, #{typeId,jdbcType=BIGINT},
+      #{outDays,jdbcType=TIMESTAMP}, now(),now()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.empl.mgr.model.TeAttendanceAbsent" >
+    insert into  te_employee.te_attendance_absent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="emId != null" >
+        emId,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="outDays != null" >
+        outDays,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="timestamp != null" >
+        `timestamp`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="emId != null" >
+        #{emId,jdbcType=BIGINT},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="outDays != null" >
+        #{outDays,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        now(),
+      </if>
+      <if test="timestamp != null" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.empl.mgr.model.TeAttendanceAbsent" >
+    update  te_employee.te_attendance_absent
+    <set >
+      <if test="emId != null" >
+        emId = #{emId,jdbcType=BIGINT},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="outDays != null" >
+        outDays = #{outDays,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestamp != null" >
+        `timestamp` = now(),
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.empl.mgr.model.TeAttendanceAbsent" >
+    update  te_employee.te_attendance_absent
+    set emId = #{emId,jdbcType=BIGINT},
+      type_id = #{typeId,jdbcType=BIGINT},
+      outDays = #{outDays,jdbcType=TIMESTAMP},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      `timestamp` = now()
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="save" parameterType="com.empl.mgr.model.TeAttendanceAbsent" >
+    insert into te_employee.te_attendance_absent (emId, type_id, outDays,createTime) values (
+      #{emId,jdbcType=BIGINT}, #{typeId,jdbcType=BIGINT},
+      #{outDays,jdbcType=TIMESTAMP}, now()
+    );
+  </insert>
+
+  <select id="list" parameterType="com.empl.mgr.model.TeAttendanceAbsent" resultMap="BaseResultMap">
+    SELECT
+    a.id,
+    a.emId,
+    a.type_id,
+    a.outDays,
+    a.createTime
+    FROM te_employee.te_attendance_absent a
+    <where>
+      <if test=" null != id and '' != id">
+        and a.id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test=" null != emId and '' != emId">
+        and a.emId = #{emId,jdbcType=BIGINT}
+      </if>
+      <if test=" null != typeId and '' != typeId">
+        and a.type_id = #{typeId,jdbcType=BIGINT}
+      </if>
+      <if test=" null != outDays and '' != outDays">
+        and a.outDays = #{outDays,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+    order by a.id desc
+  </select>
+
+  <delete id="delete" parameterType="java.lang.Long" >
+    DELETE FROM te_employee.te_attendance_absent
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+</mapper>

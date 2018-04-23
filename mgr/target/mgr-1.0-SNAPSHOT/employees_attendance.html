@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-dialog.min.css">
+    <link type="text/css" rel="stylesheet" href="css/commone.css" />
+    <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap-dialog.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap-pagy.min.js"></script>
+    <script type="text/javascript" src="./js/common.js"></script>
+    <script type="text/javascript" src="./js/plugins/my97datepicker/WdatePicker.js">
+    </script><script type="text/javascript" src="./js/employees_attendance.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="nav navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="index.html" class="navbar-brand"><span class="glyphicon glyphicon-home"></span>&nbsp;首页</a>
+        <ul class="nav navbar-nav" id="nav-box-ul"></ul>
+        <ul class="nav navbar-nav pull-right">
+            <li><a href="modify_password.html" class="acctInfo" data-toggle="modal" data-target="#modifyPassword"><span class="glyphicon glyphicon-user"></span>&nbsp;</a></li>
+            <li><a href="javascript:void(0)" onclick="exit()">注销</a></li>
+        </ul>
+    </div>
+</div>
+<div class="container main hide">
+    <div class="row">
+        <ol class="breadcrumb"></ol>
+        <div class="row main-page">
+            <div class="col-lg-8">
+                <div class="input-group">
+                    <input type="text" class="form-control searchInput" name="searchInput" placeholder="id" maxlength="64" value="" />
+                    <span class="input-group-btn"><button class="btn btn-primary" type="button" onclick="$.search()"><span class="glyphicon glyphicon-search"></span>搜索</button></span>
+                </div><!-- /input-group -->
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-primary add-btn float-right" onclick="showAddBox()"><span class="glyphicon glyphicon-plus"></span>新增出勤记录</button>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover" style="margin-top:20px;">
+            <thead>
+            <th style="width:50px;">编号</th>
+            <th style="width:200px;">员工编号</th>
+            <th style="width:300px;">出勤天数</th>
+            <th style="width:300px;">缺勤天数</th>
+            <th>操作</th>
+            </thead>
+            <tbody class="tbody"></tbody>
+        </table>
+        <nav id="pagination"><ul class="pagination"></ul></nav>
+        <footer>开发者 - 刘一江</footer>
+    </div>
+</div>
+
+<div class="modal fade modify-box sm-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h4 class="modal-title">编辑出勤信息</h4></div>
+            <div class="modal-body">
+                <input type="text" class="form-control modifyId" placeholder="id" maxlength="64" value="" />
+                <input type="text" class="form-control modifyInDays margin-top-15 resize" placeholder="出勤天数" maxlength="128"/>
+                <input type="text" class="form-control modifyOutDays margin-top-15 resize" placeholder="缺勤天数" maxlength="128"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary modifyBtn">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade add-box sm-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h4 class="modal-title">添加出勤信息</h4></div>
+            <div class="modal-body">
+                <input type="text" class="form-control addId" placeholder="员工id" maxlength="64" value="" />
+                <input type="text" class="form-control addInDays margin-top-15 resize" placeholder="出勤天数" maxlength="128"/>
+                <input type="text" class="form-control addOutDays margin-top-15 resize" placeholder="缺勤天数" maxlength="128"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="addAttendanceRecord()">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade record-box">
+    <div class="modal-dialog default-modal">
+        <div class="modal-content">
+            <div class="modal-header"><h4 class="modal-title">缺勤记录</h4></div>
+            <div class="modal-body record-modal-body" style="max-height:450px; overflow-y:auto;">
+                <button type="button" class="btn btn-success add-empl-btn hide" style="margin-bottom:15px;" onclick="showAddAbsentBox()">添加缺勤</button>
+                <table class="table table-bordered table-hover table-record-list hide">
+                    <thead>
+                    <th style="width:70px;">编号</th>
+                    <th style="width:120px;">员工ID</th>
+                    <th style="width:100px;">缺勤类型</th>
+                    <th style="width:160px;">缺勤时间</th>
+                    <th style="width:120px;">开始时间</th>
+                    <th>操作</th>
+                    </thead>
+                    <tbody class="record-list"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="closeApplyRecord()">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade add-empl-box bs-example-modal-lg">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header"><h4 class="modal-title">添加缺勤信息</h4></div>
+            <div class="modal-body">
+                <label style="display: block"> 员工Id</label>
+                <input type="text" class="form-control addAbsentId margin-bottom-15" placeholder="员工id" maxlength="64" value="" />
+                <label style="display: block;"> 缺勤事由</label>
+                <select class="form-control select select-absent margin-bottom-15">
+                    <option value="0">请选择缺勤事由</option>
+                    <option value="1">正常</option>
+                    <option value="2">事假</option>
+                    <option value="3">病假</option>
+                    <option value="4">迟到</option>
+                    <option value="5">早退</option>
+                    <option value="6">旷工</option>
+                    <option value="7">出差</option>
+                </select>
+                <label style="display: block"> 缺勤时间</label>
+                <input type="text" class="width1960 text date participate" placeholder="缺勤时间" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeAbsentListBox()">取消</button>
+                <button type="button" class="btn btn-primary" onclick="addAttendanceAbsent()">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modifyPassword" tabindex="-1" role="dialog" aria-labelledby="modifyPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:400px;"><div class="modal-content"></div></div>
+</div>
+
+</body>
+</html>
