@@ -56,7 +56,7 @@ public class AttendanceRecordServiceImpl implements IAttendanceRecordService {
     }
 
     public JSONReturn delete(TeAttendanceRecord teAttendanceRecord){
-        int rowCount = teAttendanceRecordMapper.delete(teAttendanceRecord.getId());
+        int rowCount = teAttendanceRecordMapper.delete(teAttendanceRecord.getEmId());
         if (rowCount>0){
             return JSONReturn.buildSuccess("删除成功");
         }

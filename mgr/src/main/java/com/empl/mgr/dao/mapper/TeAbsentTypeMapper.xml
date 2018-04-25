@@ -68,4 +68,5 @@
       amount = #{amount,jdbcType=DOUBLE}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 </mapper>

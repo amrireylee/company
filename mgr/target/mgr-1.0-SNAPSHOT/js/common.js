@@ -37,7 +37,7 @@ function findModuleParameter(moduleCode, initFun) {
 			obj.append($("<li></li>").append(data.body.superModuleName));
 			obj.append($("<li ckass='active'></li>").append(data.body.moduleName));
 			$('.navbar-nav').find('.dropdown[name='+data.body.code+']').addClass('active');
-			$('title').text(+data.body.moduleName + ' - ' + data.body.superModuleName);
+			$('title').text(data.body.moduleName + ' - ' + data.body.superModuleName+"by 619");
 		}
 		initFun();
 	});

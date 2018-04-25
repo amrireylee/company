@@ -122,6 +122,9 @@
      <if test=" null != id and '' != id">
        and a.id = #{id,jdbcType=BIGINT}
      </if>
+     <if test=" null != emId and '' != emId">
+       and a.emId = #{emId,jdbcType=BIGINT}
+     </if>
      <if test=" null != sum and '' != sum">
        and a.sum = #{sum,jdbcType=FLOAT}
      </if>
@@ -131,6 +134,24 @@
 
   <delete id="delete" parameterType="java.lang.Long" >
     DELETE FROM te_employee.te_salary
-    where id = #{id,jdbcType=BIGINT}
+    where emId = #{emId,jdbcType=BIGINT}
   </delete>
+
+  <update id="subPrix">
+    UPDATE te_employee.te_salary
+            SET prix = prix + #{prix,jdbcType=FLOAT}
+    where emId = #{emId,jdbcType=BIGINT}
+  </update>
+  <update id="addPrix">
+    UPDATE te_employee.te_salary
+    SET prix = prix - #{prix,jdbcType=FLOAT}
+    where emId = #{emId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByEmId" resultType="com.empl.mgr.model.TeSalary">
+    SELECT
+      <include refid="Base_Column_List"/>
+    FROM te_employee.te_salary
+    WHERE emId = #{emId,jdbcType=BIGINT}
+  </select>
 </mapper>

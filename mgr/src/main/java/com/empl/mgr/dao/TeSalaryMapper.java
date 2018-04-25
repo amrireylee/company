@@ -22,5 +22,11 @@ public interface TeSalaryMapper {
 
     List<TeSalary> list(TeSalary teSalary);
 
-    int delete(@Param("id") Long id);
+    int delete(@Param("emId") Long emId);
+
+    int subPrix(@Param("prix") Float prix,@Param("emId") Long emId);
+
+    int addPrix(@Param("prix") Float prix,@Param("emId") Long emId);
+
+    TeSalary selectByEmId(@Param("emId") Long emId);
 }

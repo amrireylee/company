@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-dialog.min.css">
+    <link type="text/css" rel="stylesheet" href="css/common.css" />
+    <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap-dialog.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap-pagy.min.js"></script>
+    <script type="text/javascript" src="./js/common.js"></script>
+    <script type="text/javascript" src="./js/company_profit.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="nav navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="index.html" class="navbar-brand"><span class="glyphicon glyphicon-home"></span>&nbsp;首页</a>
+        <ul class="nav navbar-nav" id="nav-box-ul"></ul>
+        <ul class="nav navbar-nav pull-right">
+            <li><a href="modify_password.html" class="acctInfo" data-toggle="modal" data-target="#modifyPassword"><span class="glyphicon glyphicon-user"></span>&nbsp;</a></li>
+            <li><a href="javascript:void(0)" onclick="exit()">注销</a></li>
+        </ul>
+    </div>
+</div>
+<div class="container main hide">
+    <div class="row">
+        <ol class="breadcrumb"></ol>
+        <div class="row main-page">
+            <div class="col-lg-8">
+                <div class="input-group">
+                    <input type="text" class="form-control searchInput" name="searchInput" placeholder="id" maxlength="64" value="" />
+                    <span class="input-group-btn"><button class="btn btn-primary" type="button" onclick="$.search()"><span class="glyphicon glyphicon-search"></span>搜索</button></span>
+                </div><!-- /input-group -->
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-primary add-btn float-right" onclick="showAddBox()"><span class="glyphicon glyphicon-plus"></span>添加收支信息</button>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover" style="margin-top:20px;">
+            <thead>
+            <th style="width:50px;">编号</th>
+            <th style="width:150px;">本金</th>
+            <th style="width:100px;">类型</th>
+            <th style="width:200px;">收入/支出</th>
+            <th style="width:200px;">利润</th>
+            <th style="width:200px;">备注</th>
+            </thead>
+            <tbody class="tbody"></tbody>
+        </table>
+        <nav id="pagination"><ul class="pagination"></ul></nav>
+        <footer>开发者 - 刘一江</footer>
+    </div>
+</div>
+
+<div class="modal fade add-box sm-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h4 class="modal-title">添加收支信息</h4></div>
+            <div class="modal-body">
+                <label style="display: block;">收支类型</label>
+                <select id="addType" class="form-control width1960 select margin-bottom-15">
+                    <option value="0">请选择收支类型</option>
+                    <option value="1">收入</option>
+                    <option value="2">支出</option>
+                </select>
+                <br>
+                <label style="display: block;">收支/元</label>
+                <input type="text" id="addIncome" class="form-control margin-bottom-15 resize" placeholder="收支" maxlength="200"/>
+                <label style="display: block;">备注</label>
+                <input type="text" id="addRemark" class="form-control margin-bottom-15 resize" placeholder="备注" maxlength="100"/>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="addProfit()">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modifyPassword" tabindex="-1" role="dialog" aria-labelledby="modifyPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:400px;"><div class="modal-content"></div></div>
+</div>
+
+</body>
+</html>

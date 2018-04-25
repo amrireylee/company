@@ -5,7 +5,7 @@
         <title>登录</title>
         <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="css/bootstrap-dialog.min.css">
-        <link type="text/css" rel="stylesheet" href="css/commone.css" />
+        <link type="text/css" rel="stylesheet" href="css/common.css" />
         <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="./js/bootstrap.min.js"></script>
         <script type="text/javascript" src="./js/bootstrap-dialog.min.js"></script>
@@ -15,9 +15,31 @@
             <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <style>
+            html,body {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            #particle-canvas {
+                width: 100%;
+                height: 100%;
+            }
+            .modal-canvas{
+                width: 460px;
+                height:auto;
+                margin: 0 auto;
+                overflow: hidden;
+            }
+        </style>
     </head>
     <body>
-        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog">
+    <div id="particle-canvas"></div>
+    <script type="text/javascript" src='./js/canvas.js'></script>
+        <div class="modal fade modal-canvas" style="overflow: hidden;" id="login-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document" style="width:420px;">
                 <div class="modal-content" style="width:420px;">
                     <div class="modal-header" style="background:#428bca; color:#fff;">

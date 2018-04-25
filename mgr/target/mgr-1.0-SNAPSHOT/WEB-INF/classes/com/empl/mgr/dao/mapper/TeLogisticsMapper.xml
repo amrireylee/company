@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.empl.mgr.dao.TeLogisticsMapper">
+  <resultMap id="BaseResultMap" type="com.empl.mgr.model.TeLogistics" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="logistics_desc" property="logisticsDesc" jdbcType="VARCHAR" />
+    <result column="use_num" property="useNum" jdbcType="INTEGER" />
+    <result column="not_use_num" property="notUseNum" jdbcType="INTEGER" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="timestamp" property="timestamp" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, logistics_desc, use_num, not_use_num, total, timestamp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from te_employee.te_logistics
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from te_employee.te_logistics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.empl.mgr.model.TeLogistics">
+    insert into te_employee.te_logistics (id, name, logistics_desc,
+      use_num, not_use_num, total,
+      timestamp)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{logisticsDesc,jdbcType=VARCHAR},
+      #{useNum,jdbcType=INTEGER}, #{notUseNum,jdbcType=INTEGER}, #{total,jdbcType=INTEGER},
+      #{timestamp,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.empl.mgr.model.TeLogistics">
+    insert into te_employee.te_logistics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="logisticsDesc != null">
+        logistics_desc,
+      </if>
+      <if test="useNum != null">
+        use_num,
+      </if>
+      <if test="notUseNum != null">
+        not_use_num,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsDesc != null">
+        #{logisticsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="useNum != null">
+        #{useNum,jdbcType=INTEGER},
+      </if>
+      <if test="notUseNum != null">
+        #{notUseNum,jdbcType=INTEGER},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.empl.mgr.model.TeLogistics">
+    update te_employee.te_logistics
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsDesc != null">
+        logistics_desc = #{logisticsDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="useNum != null">
+        use_num = #{useNum,jdbcType=INTEGER},
+      </if>
+      <if test="notUseNum != null">
+        not_use_num = #{notUseNum,jdbcType=INTEGER},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.empl.mgr.model.TeLogistics">
+    update te_employee.te_logistics
+    set name = #{name,jdbcType=VARCHAR},
+      logistics_desc = #{logisticsDesc,jdbcType=VARCHAR},
+      use_num = #{useNum,jdbcType=INTEGER},
+      not_use_num = #{notUseNum,jdbcType=INTEGER},
+      total = #{total,jdbcType=INTEGER},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="save" parameterType="com.empl.mgr.model.TeLogistics" >
+    insert into te_employee.te_logistics (name, logistics_desc, use_num,not_use_num, total) values (
+      #{name,jdbcType=VARCHAR}, #{logisticsDesc,jdbcType=VARCHAR},
+      #{useNum,jdbcType=INTEGER}, #{notUseNum,jdbcType=INTEGER}, #{total,jdbcType=INTEGER}
+    );
+  </insert>
+
+  <select id="list" parameterType="com.empl.mgr.model.TeLogistics" resultMap="BaseResultMap">
+    SELECT
+    a.id,
+    a.name,
+    a.logistics_desc,
+    a.use_num,
+    a.not_use_num,
+    a.total
+    FROM te_employee.te_logistics a
+    <where>
+      <if test=" null != id and '' != id">
+        and a.id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test=" null != total and '' != total">
+        and a.total = #{total,jdbcType=INTEGER}
+      </if>
+    </where>
+    order by a.id desc
+  </select>
+
+  <delete id="delete" parameterType="java.lang.Long" >
+    DELETE FROM te_employee.te_logistics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <update id="use" parameterType="java.lang.Long"  >
+    UPDATE te_employee.te_logistics
+    set use_num = use_num+1,
+    not_use_num = not_use_num-1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="notUse" parameterType="java.lang.Long"  >
+    UPDATE te_employee.te_logistics
+    set use_num = use_num-1,
+    not_use_num = not_use_num+1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

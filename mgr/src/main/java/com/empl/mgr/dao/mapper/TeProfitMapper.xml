@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.empl.mgr.dao.TeProfitMapper" >
+  <resultMap id="BaseResultMap" type="com.empl.mgr.model.TeProfit" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="principal" property="principal" jdbcType="DECIMAL" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="income" property="income" jdbcType="DECIMAL" />
+    <result column="profit" property="profit" jdbcType="DECIMAL"/>
+    <result column="all_income" property="allIncome" jdbcType="DECIMAL" />
+    <result column="all_expense" property="allExpense" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="timestamp" property="timestamp" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, principal, type, income, profit, all_income, all_expense, remark, timestamp
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from te_employee.te_profit
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from te_employee.te_profit
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.empl.mgr.model.TeProfit" >
+    insert into te_employee.te_profit (id, principal, type,
+      income, profit, all_income,
+      all_expense, remark, timestamp
+      )
+    values (#{id,jdbcType=BIGINT}, #{principal,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER}, 
+      #{income,jdbcType=DECIMAL}, #{profit,jdbcType=DECIMAL}, #{allIncome,jdbcType=DECIMAL}, 
+      #{allExpense,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{timestamp,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.empl.mgr.model.TeProfit" >
+    insert into te_employee.te_profit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="income != null" >
+        income,
+      </if>
+      <if test="profit != null" >
+        profit,
+      </if>
+      <if test="allIncome != null" >
+        all_income,
+      </if>
+      <if test="allExpense != null" >
+        all_expense,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="timestamp != null" >
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="profit != null" >
+        #{profit,jdbcType=DECIMAL},
+      </if>
+      <if test="allIncome != null" >
+        #{allIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="allExpense != null" >
+        #{allExpense,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.empl.mgr.model.TeProfit" >
+    update te_employee.te_profit
+    <set >
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="income != null" >
+        income = #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="profit != null" >
+        profit = #{profit,jdbcType=DECIMAL},
+      </if>
+      <if test="allIncome != null" >
+        all_income = #{allIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="allExpense != null" >
+        all_expense = #{allExpense,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null" >
+        timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.empl.mgr.model.TeProfit" >
+    update te_employee.te_profit
+    set principal = #{principal,jdbcType=DECIMAL},
+      type = #{type,jdbcType=INTEGER},
+      income = #{income,jdbcType=DECIMAL},
+      profit = #{profit,jdbcType=DECIMAL},
+      all_income = #{allIncome,jdbcType=DECIMAL},
+      all_expense = #{allExpense,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="save" parameterType="com.empl.mgr.model.TeProfit" >
+    insert into te_employee.te_profit (principal,type, income,profit,all_income,all_expense, remark) values (
+      #{principal,jdbcType=DECIMAL}, #{type,jdbcType=INTEGER},
+      #{income,jdbcType=DECIMAL}, #{profit,jdbcType=DECIMAL}, #{allIncome,jdbcType=DECIMAL},
+      #{allExpense,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}
+    );
+  </insert>
+
+  <select id="list" parameterType="com.empl.mgr.model.TeProfit" resultMap="BaseResultMap">
+    SELECT
+    a.id,
+    a.principal,
+    a.type,
+    a.income,
+    a.profit,
+    a.all_income,
+    a.all_expense,
+    a.remark,
+    a.timestamp
+    FROM te_employee.te_profit a
+    <where>
+      <if test=" null != id and '' != id">
+        and a.id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test=" null != type and '' != type">
+        and a.type = #{type,jdbcType=INTEGER}
+      </if>
+    </where>
+    order by a.timestamp desc
+  </select>
+
+  <delete id="delete" parameterType="java.lang.Long" >
+    DELETE FROM te_employee.te_profit
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <select id="selectLast" resultType="com.empl.mgr.model.TeProfit">
+    SELECT
+      <include refid="Base_Column_List"/>
+    FROM te_employee.te_profit
+    WHERE timestamp = (
+      SELECT max(timestamp)
+    FROM te_profit
+    )
+  </select>
+
+
+</mapper>

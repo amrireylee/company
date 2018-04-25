@@ -13,7 +13,6 @@ function initFun() {
 }
 /*
  * 获取数据列表
- * te5l.com [K]
  */
 function findListInfo() {
 	$.post('mgr/account/findAccountList', {
@@ -38,7 +37,6 @@ function findListInfo() {
 }
 /*
  * 获取数据分页
- * te5l.com [K]
  */
 function findAccountPage() {
 	$.post('mgr/account/findAccountPage', {
@@ -50,7 +48,6 @@ function findAccountPage() {
 }
 /*
  * 解析操作按钮
- * te5l.com [K]
  */
 function analyzeBtns(v){
 	var btns = "";
@@ -62,7 +59,6 @@ function analyzeBtns(v){
 }
 /*
  * 显示添加窗口
- * te5l.com [K]
  */
 function showAddBox(){
 	$('.empty').removeClass('empty');
@@ -73,7 +69,6 @@ function showAddBox(){
 }
 /*
  * 添加账户信息
- * te5l.com [K]
  */
 var account = {};
 function addAccount(){
@@ -86,7 +81,7 @@ function addAccount(){
 	$.post('mgr/account/addAccount', {
 		user : account.username,
 		nick : account.nickname,
-		pass : account.password,
+		pass : account.password
 	}, function(data){
 		dialog.close();
 		if(!$.isSuccess(data)) return;
@@ -97,7 +92,6 @@ function addAccount(){
 }
 /*
  * 提示并删除帐号列表
- * te5l.com [K]
  */
 function hintDelete(id){
 	if(!id) return;
@@ -114,11 +108,10 @@ function hintDelete(id){
 }
 /*
  * 提示并确认初始密码为123456
- * te5l.com [K]
  */
 function initPassword(id){
 	if(!id) return;
-	BootstrapDialog.confirm("请确定是否将该账户密码重置为 <b style='color:red;'>www.te5l.com</b>", function(result){
+	BootstrapDialog.confirm("请确定是否将该账户密码重置为 <b style='color:red;'>123456</b>", function(result){
 		if(!result) return;
 		dialog = BootstrapDialog.isSubmitted();
 		$.getJSON('mgr/account/initPassword', {id:id}, function(data){
@@ -130,7 +123,6 @@ function initPassword(id){
 }
 /*
  * 显示编辑窗口
- * te5l.com [K]
  */
 function showModifyBox(id){
 	$('.empty').removeClass('empty');
@@ -147,7 +139,6 @@ function showModifyBox(id){
 }
 /*
  * 编辑帐户信息
- * te5l.com [K]
  */
 function mdoifyAccount(){
 	if(!account.id) return;
@@ -168,7 +159,6 @@ function mdoifyAccount(){
 }
 /*
  * 遍历并显示角色列表
- * te5l.com [K]
  */
 function roleMgr(acctName){
 	if(!acctName) return;
@@ -187,7 +177,11 @@ function roleMgr(acctName){
 	});
 }
 function findRoleCheckBox(v){
-	return "<input type='checkbox' "+$.findChecked(v.opt)+" onclick='setAccountRole(this,"+v.id+")' code='"+v.id+"' />";
+	return "<input type='checkbox' "+findChecked(v.opt)+" onclick='setAccountRole(this,"+v.id+")' code='"+v.id+"' />";
+}
+
+function findChecked(val){
+    return val ? " checked=true " : "" ;
 }
 /*
  * 为当前帐户设置角色

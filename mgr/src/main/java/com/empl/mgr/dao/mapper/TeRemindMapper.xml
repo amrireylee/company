@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.empl.mgr.dao.TeRemindMapper">
+  <resultMap id="BaseResultMap" type="com.empl.mgr.model.TeRemind" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="timestamp" property="timestamp" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, note, start_time, end_time, area, timestamp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from te_employee.te_remind
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from te_employee.te_remind
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.empl.mgr.model.TeRemind">
+    insert into te_employee.te_remind (id, title, note,
+      start_time, end_time, area, 
+      timestamp)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}, 
+      #{timestamp,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.empl.mgr.model.TeRemind">
+    insert into te_employee.te_remind
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.empl.mgr.model.TeRemind">
+    update te_employee.te_remind
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.empl.mgr.model.TeRemind">
+    update te_employee.te_remind
+    set title = #{title,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      area = #{area,jdbcType=VARCHAR},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <insert id="save" parameterType="com.empl.mgr.model.TeRemind" >
+    insert into te_employee.te_remind (title, note, start_time,end_time, area) values (
+      #{title,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{area,jdbcType=VARCHAR}
+     );
+  </insert>
+
+  <select id="list" parameterType="com.empl.mgr.model.TeRemind" resultMap="BaseResultMap">
+    SELECT
+    a.id,
+    a.title,
+    a.note,
+    a.start_time,
+    a.end_time,
+    a.area
+    FROM te_employee.te_remind a
+    <where>
+      <if test=" null != id and '' != id">
+        and a.id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test=" null != title and '' != title">
+        and a.title like '%' #{title,jdbcType=VARCHAR} '%'
+      </if>
+    </where>
+    order by a.id desc
+  </select>
+
+  <delete id="delete" parameterType="java.lang.Long" >
+    DELETE FROM te_employee.te_remind
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+</mapper>

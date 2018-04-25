@@ -51,7 +51,7 @@ function findListInfo() {
 function analyzeBtns(v) {
     var btns = "";
     btns += secure.modify ? "<button type='button' class='btn btn-primary btn-xs' onclick='showModifyBox("+ v.id + ")'><span class='glyphicon glyphicon-pencil'></span>编辑</button>" : "";
-    btns += secure.del ? "<button type='button' class='btn btn-danger btn-xs' onclick='hintDelete(" + v.id + ")'><span class='glyphicon glyphicon-remove'></span>删除</button>" : "";
+    btns += secure.del ? "<button type='button' class='btn btn-danger btn-xs' onclick='hintDelete(" + v.emId + ")'><span class='glyphicon glyphicon-remove'></span>删除</button>" : "";
     return btns;
 }
 
@@ -63,12 +63,12 @@ function hintDelete(id) {
     BootstrapDialog.confirm("请确认是否要删除该薪资记录?<br />", function(result) {
         if (!result) return;
         dialog = BootstrapDialog.isSubmitted();
-        $.post('mgr/employees/salary/delete', {id : id}, function(data) {
+        $.post('mgr/employees/salary/delete', {emId : id}, function(data) {
             dialog.close();
             if (!$.isSuccess(data)) return;
             findListInfo();
             BootstrapDialog.msg(data.body, BootstrapDialog.TYPE_SUCCESS);
-        });
+        }, 'json');
     });
 }
 /*

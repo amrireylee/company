@@ -23,7 +23,7 @@ public interface TeAttendanceAbsentMapper {
 
     List<TeAttendanceAbsent> list(TeAttendanceAbsent teAttendanceAbsent);
 
-    int delete(@Param("id") Long id);
+    int delete(@Param("emId") Long emId);
 
 
 }

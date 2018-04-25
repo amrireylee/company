@@ -138,7 +138,7 @@
 
   <delete id="delete" parameterType="java.lang.Long" >
     DELETE FROM te_employee.te_attendance_absent
-    where id = #{id,jdbcType=INTEGER}
+    where emId = #{emId,jdbcType=INTEGER}
   </delete>
 
 </mapper>

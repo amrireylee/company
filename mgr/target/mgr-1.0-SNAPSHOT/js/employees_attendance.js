@@ -50,7 +50,7 @@ function analyzeBtns(v) {
     var btns = "";
     btns += secure.modify ? "<button type='button' class='btn btn-primary btn-xs' onclick='showModifyBox("+ v.id + ")'><span class='glyphicon glyphicon-pencil'></span>编辑</button>" : "";
     btns += secure.find ? "<button type='button' class='btn btn-success btn-xs' onclick='showRecord(" + v.emId + ")'><span class='glyphicon glyphicon-paperclip'></span>记录</button>" : "";
-    btns += secure.del ? "<button type='button' class='btn btn-danger btn-xs' onclick='hintDelete(" + v.id + ")'><span class='glyphicon glyphicon-remove'></span>删除</button>" : "";
+    btns += secure.del ? "<button type='button' class='btn btn-danger btn-xs' onclick='hintDelete(" + v.emId + ")'><span class='glyphicon glyphicon-remove'></span>删除</button>" : "";
     return btns;
 }
 
@@ -62,12 +62,12 @@ function hintDelete(id) {
     BootstrapDialog.confirm("请确认是否要删除该出勤记录?<br />", function(result) {
         if (!result) return;
         dialog = BootstrapDialog.isSubmitted();
-        $.post('mgr/employees/attendanceRecord/delete', {id : id}, function(data) {
+        $.post('mgr/employees/attendanceRecord/delete', {emId : id}, function(data) {
             dialog.close();
             if (!$.isSuccess(data)) return;
             findListInfo();
             BootstrapDialog.msg(data.body, BootstrapDialog.TYPE_SUCCESS);
-        });
+        }, 'json');
     });
 }
 /*
@@ -284,7 +284,7 @@ function buildReqData3(){
  */
 function analyzeApplyBtns(v){
     var btns = "";
-        btns += "<button type='button' class='btn btn-danger btn-xs' onclick='delEmployeesAbsent(" + v.id + ")'><span class='glyphicon glyphicon-minus'></span>删除</button>" ;
+        btns += "<button type='button' class='btn btn-danger btn-xs' onclick='delEmployeesAbsent(" + v.emId + ")'><span class='glyphicon glyphicon-minus'></span>删除</button>" ;
 
     return btns;
 }
@@ -297,12 +297,17 @@ function delEmployeesAbsent(id){
         if(!result) return;
         dialog = BootstrapDialog.loading();
         $.post('./mgr/employees/attendanceAbsent/delete', {
-            id : id
+            emId : id
         }, function(data){
             dialog.close();
             if(!$.isSuccess(data)) return;
             BootstrapDialog.msg(data.body, BootstrapDialog.TYPE_SUCCESS);
-            showRecord(attendanceAbsent.id);
-        });
+            showRecord(attendanceAbsent.emId);
+        }, 'json');
     });
+}
+
+function closeAbsentRecord(){
+    findListInfo();
+    BootstrapDialog.hideModel($('div.record-box'));
 }

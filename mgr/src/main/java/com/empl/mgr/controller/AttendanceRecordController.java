@@ -28,7 +28,7 @@ public class AttendanceRecordController extends AbstractController {
 
     @ResponseBody
     @RequestMapping(value = "/saveRecord", method = RequestMethod.POST)
-    @SecureValid(code = "02001", desc = "保存员工薪资信息", type = MethodType.ADD)
+    @SecureValid(code = "02001", desc = "保存员工出勤记录信息", type = MethodType.ADD)
     public JSONReturn saveAttendanceRecord(@RequestBody TeAttendanceRecord teAttendanceRecord, HttpSession httpSession) {
         return iAttendanceRecordService.saveOrUpdate(teAttendanceRecord);
     }

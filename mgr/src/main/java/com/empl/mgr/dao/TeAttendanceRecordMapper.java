@@ -22,5 +22,9 @@ public interface TeAttendanceRecordMapper {
 
     List<TeAttendanceRecord> list(TeAttendanceRecord teAttendanceRecord);
 
-    int delete(@Param("id") Long id);
+    int delete(@Param("emId") Long emId);
+
+    int addAbsent(@Param("emId")Long emId);
+
+    int subAbsent(@Param("emId")Long emId);
 }

@@ -30,7 +30,6 @@ td{table-layout:fixed; word-break: break-all; overflow:hidden;}
 .table-val .select{width:100%; border:1px solid #dddddd;}
 .table-val .text{width:100%;}
 .width180{width:180px;}
-.width1960{width:100%;}
 .label{height:20px; line-height:20px; color:#000; float:left;}
 .label input{float:left; margin-top:7px; height:auto;}
 .label-text{padding:0px 5px 0px 3px; line-height:27px; font-weight:normal;}
@@ -108,3 +107,32 @@ td.si-key{width:100px; padding-right:10px; text-align:right; font-weight:bold;}
 .tools{padding:15px 0px; border-bottom:1px solid #e5e5e5;}
 
 .select-absent{width: 100%;}
+
+.btn-box {
+    display: block;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    text-decoration: none;
+    color:#29b7d3;
+
+}
+.main-box{
+    text-align: center;
+    padding: 30px;
+}
+.main-box i{
+    font-size: 30px;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.btn-box i :hover{
+    color: rgba(0,0,0,0.4);
+}
+
+
+.width1960{width:100%;}

@@ -12,8 +12,8 @@ public class TeAttendanceAbsent {
 
     private Long typeId;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date outDays;
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
@@ -59,8 +59,8 @@ public class TeAttendanceAbsent {
         this.typeId = typeId;
     }
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm",timezone = "GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     public Date getOutDays() {
         return outDays;
     }

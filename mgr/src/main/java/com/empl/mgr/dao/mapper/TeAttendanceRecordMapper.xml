@@ -110,6 +110,20 @@
 
   <delete id="delete" parameterType="java.lang.Long" >
     DELETE FROM te_employee.te_attendance_record
-    where id = #{id,jdbcType=INTEGER}
+    where emId = #{emId,jdbcType=INTEGER}
   </delete>
+
+  <update id="addAbsent" parameterType="java.lang.Long"  >
+    UPDATE te_employee.te_attendance_record
+    set inDays = inDays-1,
+    outDays = outDays+1
+    where emId = #{emId,jdbcType=INTEGER}
+  </update>
+
+  <update id="subAbsent" parameterType="java.lang.Long"  >
+    UPDATE te_employee.te_attendance_record
+    set inDays = inDays+1,
+    outDays = outDays-1
+    where emId = #{emId,jdbcType=INTEGER}
+  </update>
 </mapper>

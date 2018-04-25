@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-dialog.min.css">
+    <link type="text/css" rel="stylesheet" href="css/common.css" />
+    <script type="text/javascript" src="./js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap-dialog.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap-pagy.min.js"></script>
+        <script type="text/javascript" src="./js/common.js"></script>
+    <script type="text/javascript" src="./js/company_logistics.js"></script>
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="nav navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="index.html" class="navbar-brand"><span class="glyphicon glyphicon-home"></span>&nbsp;首页</a>
+        <ul class="nav navbar-nav" id="nav-box-ul"></ul>
+        <ul class="nav navbar-nav pull-right">
+            <li><a href="modify_password.html" class="acctInfo" data-toggle="modal" data-target="#modifyPassword"><span class="glyphicon glyphicon-user"></span>&nbsp;</a></li>
+            <li><a href="javascript:void(0)" onclick="exit()">注销</a></li>
+        </ul>
+    </div>
+</div>
+<div class="container main hide">
+    <div class="row">
+        <ol class="breadcrumb"></ol>
+        <div class="row main-page">
+            <div class="col-lg-8">
+                <div class="input-group">
+                    <input type="text" class="form-control searchInput" name="searchInput" placeholder="id" maxlength="64" value="" />
+                    <span class="input-group-btn"><button class="btn btn-primary" type="button" onclick="$.search()"><span class="glyphicon glyphicon-search"></span>搜索</button></span>
+                </div><!-- /input-group -->
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2">
+                <button type="button" class="btn btn-primary add-btn float-right" onclick="showAddBox()"><span class="glyphicon glyphicon-plus"></span>新增物品</button>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover" style="margin-top:20px;">
+            <thead>
+            <th style="width:50px;">编号</th>
+            <th style="width:150px;">物品名称</th>
+            <th style="width:300px;">描述</th>
+            <th style="width:100px;">已使用数量</th>
+            <th style="width:100px;">未使用数量</th>
+            <th style="width:100px;">总数量</th>
+            <th>操作</th>
+            </thead>
+            <tbody class="tbody"></tbody>
+        </table>
+        <nav id="pagination"><ul class="pagination"></ul></nav>
+        <footer>开发者 - 刘一江</footer>
+    </div>
+</div>
+
+<div class="modal fade modify-box sm-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h4 class="modal-title">编辑物品信息</h4></div>
+            <div class="modal-body">
+                <input type="text" id="modifyId" class="form-control " placeholder="id" maxlength="64" value="" />
+                <input type="text" id="modifyName" class="form-control  margin-top-15 resize" placeholder="主题" maxlength="200"/>
+                <input type="text" id="modifyDesc" class="form-control margin-top-15 resize" placeholder="地点" maxlength="描述"/>
+                <input type="text" id="modifyUse" class="form-control text date participate margin-top-15 resize" placeholder="已使用数量" />
+                <input type="text" id="modifyNotUse" class="form-control text date participate margin-top-15 resize" placeholder="未使用数量" />
+                <input type="text" id="modifyTotal" class="form-control margin-top-15 resize" placeholder="总数量" maxlength="128"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary modifyBtn">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade add-box sm-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h4 class="modal-title">添加物品信息</h4></div>
+            <div class="modal-body">
+                <input type="text" id="addName" class="form-control margin-top-15 resize" placeholder="物品名称" maxlength="200"/>
+                <input type="text" id="addDesc" class="form-control margin-top-15 resize" placeholder="物品描述" maxlength="200"/>
+                <input type="text" id="addTotal" class="form-control margin-top-15 resize" placeholder="总数量" maxlength="128"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="addLogistics()">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modifyPassword" tabindex="-1" role="dialog" aria-labelledby="modifyPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:400px;"><div class="modal-content"></div></div>
+</div>
+
+</body>
+</html>
